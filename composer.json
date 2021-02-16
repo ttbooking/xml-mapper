@@ -1,0 +1,28 @@
+{
+    "name": "ttbooking/xml-mapper",
+    "description": "Base elements to map xml into objects and objects into xml",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrey Romashov",
+            "email": "a.romashov@ttbooking.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4",
+        "ext-xmlreader": "*",
+        "ext-xmlwriter": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "XmlMapper\\" : "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    }
+}

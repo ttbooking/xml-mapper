@@ -159,7 +159,7 @@ abstract class NodeElement
                 return;
             } else if ($xmlReader->nodeType == $xmlReader::TEXT) {
                 $this->_setNodeText($xmlReader->readString());
-            } else {
+            } else if ($xmlReader->nodeType == $xmlReader::ELEMENT) {
 
                 $classAttributes = get_class_vars(static::class);
 

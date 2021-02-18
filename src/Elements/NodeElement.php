@@ -151,13 +151,22 @@ abstract class NodeElement
 		}
 
 		$xmlReader->moveToElement();
-        // считываем дочерние узлы
 
-        while($xmlReader->read()) {
+		/**
+		 * Если элемент пуст, то заканчиваем
+		 */
+        if ($xmlReader->isEmptyElement) {
+            return;
+        }
+
+		// считываем дочерние узлы
+		$lastReadingResult = $xmlReader->read();
+        while($lastReadingResult) {
             if ($xmlReader->nodeType === $xmlReader::END_ELEMENT) {
                 //Тэг закрылся...мэп закрылся
                 return;
             } else if ($xmlReader->nodeType == $xmlReader::TEXT) {
+            	/** Установка текстового значения */
                 $this->_setNodeText($xmlReader->readString());
             } else if ($xmlReader->nodeType == $xmlReader::ELEMENT) {
 
@@ -189,7 +198,6 @@ abstract class NodeElement
                         ];
 
                     } else if(is_a($typeClassName, NodeArray::class, true)) {
-                        /** @var NodeArray $nodeArray */
                         $name = $this->getClassTagName(Helper::getDefaultProperty($typeClassName, 'className'));
                         $classChildrenArrayAssociation[$name] = [
                             'property' => $classAttribute,
@@ -220,7 +228,16 @@ abstract class NodeElement
                     $object->_mapFromXml($xmlReader, $classMap);
 
                     $arrayObject->addItem($object);
-                }
+
+                } else {
+					/**
+					 * Если не нашлось нужного атрибута класса, пропустим поддерево
+					 */
+					$lastReadingResult = $xmlReader->next();
+					continue;
+				}
+
+				$lastReadingResult = $xmlReader->read();
             }
         }
 

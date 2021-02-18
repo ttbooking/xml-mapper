@@ -236,9 +236,9 @@ abstract class NodeElement
 					$lastReadingResult = $xmlReader->next();
 					continue;
 				}
-
-				$lastReadingResult = $xmlReader->read();
             }
+
+			$lastReadingResult = $xmlReader->read();
         }
 
     }

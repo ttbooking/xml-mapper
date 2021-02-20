@@ -353,4 +353,36 @@ abstract class NodeElement
 	public function _setNamespace(NodeNamespace $namespace) {
     	$this->_namespace = $namespace;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function __toString() {
+		return $this->_getNodeText();
+	}
+
+	/**
+	 * @param $name
+	 * @return string|null
+	 */
+	public function __get($name) {
+		return $this->_getAttribute($name);
+	}
+
+	/**
+	 * @param $name
+	 * @param $value
+	 */
+	public function __set($name, $value) {
+		$this->_attributes[$name] = $value;
+	}
+
+	/**
+	 * @param $name
+	 */
+	public function __isset($name) {
+		return isset($this->_attributes[$name]);
+	}
+
+
 }

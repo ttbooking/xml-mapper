@@ -3,7 +3,7 @@
     "description": "Base elements to map xml into objects and objects into xml",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "authors": [
         {
             "name": "Andrey Romashov",
